@@ -30,7 +30,16 @@ input_opus_dec.c
 output_opus_enc.c  
 
 Ensure your platformio.ini file contains the opus build flags and compile....  
+
+For those wanting to decode asynchronous data transmissions, putData() returns the time since update() was last called.  
+Decoder synchronisation is then possible by direct manipulation of the denominator within the Audio PLL’s phase fractional divider.  
+Minor changes to PLL4 PFD from main() will not impact audio continuity e.g;  
+`int32_t denominator = CCM_ANALOG_PLL_AUDIO_DENOM;`  
+`...`  
+`phase = opusDecoder.putData(opusBuffer, opusBufSize);`  
+`CCM_ANALOG_PLL_AUDIO_DENOM = (denominator + (phase/100) - 100);`  
+
 Happy compressing 😄
 
+![](https://github.com/mgergos/assets/blob/main/Opus_over_LORA.jpg?raw=true)
 
-![](/assets/Opus_over_LORA.jpg)
