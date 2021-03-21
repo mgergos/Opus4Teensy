@@ -1,13 +1,13 @@
 # Opus4Teensy  
 ## Real-time Opus Encoding / Decoding for Teensy 4.0 🚧
 
-Encodes and Decodes full band audio down to 16 kbs without significant artifacts.  
+Encodes and Decodes full band audio down to 16 kbs without significant artefacts.  
 Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.  
 I've simply wrapped it as per https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html  
 
 The sample loopback main.cpp runs on Teensy 4.0 with Audio Shield Rev D.  
 The SGTL5000's input is encoded and passed directly to the decoder.  
-The the default data rate of 64k can be re-configured using setBitrate().  
+The default data rate of 64k can be re-configured using setBitrate().  
 
 A few notes;
 1. Opus requires numerous build flags for compilation, so recommend platformIO environment
@@ -33,7 +33,7 @@ Ensure your platformio.ini file contains the opus build flags and compile....
 
 For those wanting to decode asynchronous data transmissions, putData() returns the time since update() was last called.  
 Decoder synchronisation is then possible by direct manipulation of the denominator within the Audio PLL’s phase fractional divider.  
-Minor changes to PLL4 PFD from main() will not impact audio continuity e.g;  
+Minor changes to PLL4 PFD from main() will not impact audio continuity eg;  
 `int32_t denominator = CCM_ANALOG_PLL_AUDIO_DENOM;`  
 `...`  
 `phase = opusDecoder.putData(opusBuffer, opusBufSize);`  
