@@ -23,7 +23,7 @@ Add the following lines to C:\Users\..\.platformio\packages\framework-arduinotee
 `#include "input_opus_dec.h"`  
 `#include "output_opus_enc.h"`  
 
-Add the following files to C:\Users\..\.platformio\packages\framework-arduinoteensy\libraries\Audio  
+Move the following files to C:\Users\..\.platformio\packages\framework-arduinoteensy\libraries\Audio  
 input_opus_dec.h  
 output_opus_enc.h  
 input_opus_dec.c  
