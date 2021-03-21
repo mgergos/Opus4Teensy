@@ -1,5 +1,5 @@
-# Opus4Teensy
-## A real-time fixed-point implementation of Opus Encoder/Decoder for Teensy 4.0
+# Opus4Teensy 🚧
+## Real-time Opus Encoding / Decoding for Teensy 4.0
 
 Encodes / decodes full band audio to as low as 16 kbs without significant artifacts.  
 Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.  
@@ -10,9 +10,9 @@ The SGTL5000's input is encoded and passed directly to the decoder.
 The data rate 64000 by default and can be configured using setBitrate().  
 
 A few notes;
-1. Opus requires many build flags for compilation, so use platformIO environment
-2. Opus prefers 48Khz and frame sizes of 2.5, 5, 10 and 20 ms
-3. Many of PJRC's audio libraries are hard coded to 44100, thus may not play nice
+1. Opus requires numerous build flags for compilation, so recommend platformIO environment
+2. Opus prefers 48Khz and frame sizes of 2.5, 5, 10 and 20 ms - default 20 ms
+3. Many of PJRC's audio libraries are hard coded to 44100, thus they may not play nice anymore
 4. A few tweaks to the audio library are required as shown below;
 
 Edit the following lines in C:\Users\..\.platformio\packages\framework-arduinoteensy\cores\teensy4\AudioStream.h  
