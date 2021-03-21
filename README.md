@@ -1,16 +1,20 @@
 # Opus4Teensy
 ## A real-time fixed-point implementation of Opus Encoder/Decoder for Teensy 4.0
-### Supports encode and decode of full band audio at data rates of 8k to 64k
 
+Encodes / decodes full band audio to as low as 16 kbs without significant damage.
 Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.
-I've simply added config.h and wrapped it in C++ as per PJRC's recommendations.
+I've simply wrapped it as per https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html 
+(actually wasn't that simple!)
 
-You can run the sample loopback main.cpp on Teensy 4.0 with Audio Shiels Rev D.
+The sample loopback main.cpp runs on Teensy 4.0 with Audio Shield Rev D.
+The SGTL5000's input is encoded and passed directly to the decoder.
+The data rate 64000 by default and can be configured using setBitrate().
 
-Notes;
-1. Opus prefers 48Khz and frame sizes of 2.5, 5, 10 and 20 ms
-2. Opus requires many build flags for compilation, so use platformIO, not Arduino
-3. A few tweaks to the audio library are required as shown below;
+A few notes;
+1. Opus requires many build flags for compilation, so use platformIO environment
+2. Opus prefers 48Khz and frame sizes of 2.5, 5, 10 and 20 ms
+3. Many of PJRC's audio libraries are hard coded to 44100, thus may not play nice
+4. A few tweaks to the audio library are required as shown below;
 
 Edit the following lines in C:\Users\..\.platformio\packages\framework-arduinoteensy\cores\teensy4\AudioStream.h
 #define AUDIO_BLOCK_SAMPLES  960 // Was 128
@@ -25,3 +29,6 @@ input_opus_dec.h
 output_opus_enc.h
 input_opus_dec.c
 output_opus_enc.c
+
+Ensure your platformio.ini file contains the opus build flags and compile....
+Happy compressing :)
