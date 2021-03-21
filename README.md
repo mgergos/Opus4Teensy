@@ -1,17 +1,17 @@
 # Opus4Teensy  
 ## Real-time Opus Encoding / Decoding for Teensy 4.0 🚧
 
-Encodes and Decodes full band audio down to 16 kbs without significant artefacts.  
+Encodes and Decodes fullband audio down to 16 kbs without significant artefacts.  
 Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.  
-I've simply wrapped it as per https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html  
+I've simply wrapped it as per PJRC's guidelines https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html  
 
 The sample loopback main.cpp runs on Teensy 4.0 with Audio Shield Rev D.  
 The SGTL5000's input is encoded and passed directly to the decoder.  
 The default data rate of 64k can be re-configured using setBitrate().  
 
 A few notes;
-1. Opus requires numerous build flags for compilation, so recommend platformIO environment
-2. Opus prefers 48Khz and frame sizes of 2.5, 5, 10 and 20 ms - default 20 ms for this implementation
+1. Opus requires numerous build flags for compilation, thus recommend using platformIO environment
+2. Opus is optimised for 48Khz and fixed frame sizes - default is 20 ms for this implementation
 3. Many of PJRC's audio libraries are hard coded to 44100, thus they may not play nice anymore
 4. A few tweaks to the audio library are required as shown below;
 
@@ -39,7 +39,7 @@ Minor changes to PLL4 PFD from main() will not impact audio continuity eg;
 `phase = opusDecoder.putData(opusBuffer, opusBufSize);`  
 `CCM_ANALOG_PLL_AUDIO_DENOM = (denominator + (phase/100) - 100);`  
 
-Happy compressing 😄
+Happy compressing 😄  
 
+_Fullband audio over 32 kbs RF link - Opus over LORA_
 ![](https://github.com/mgergos/assets/blob/main/Opus_over_LORA.jpg?raw=true)
-
