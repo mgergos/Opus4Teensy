@@ -18,7 +18,7 @@ void setup()
   AudioMemory(10);
   sgtl5000_1.enable();  
   sgtl5000_1.inputSelect(AUDIO_INPUT_MIC);
-  sgtl5000_1.volume(0.5);
+  sgtl5000_1.volume(0.6);
   opusEncoder.initialise(); // Default is 64kbs
   opusDecoder.initialise();
 }
