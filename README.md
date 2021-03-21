@@ -1,10 +1,9 @@
-# Opus4Teensy 🚧
-## Real-time Opus Encoding / Decoding for Teensy 4.0
+# Opus4Teensy  
+## Real-time Opus Encoding / Decoding for Teensy 4.0 🚧
 
-Encodes / decodes 'full band' audio down to 16 kbs without significant artifacts.  
+Encodes and Decodes full band audio down to 16 kbs without significant artifacts.  
 Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.  
 I've simply wrapped it as per https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html  
-(NB. actually wasn't that simple!)  
 
 The sample loopback main.cpp runs on Teensy 4.0 with Audio Shield Rev D.  
 The SGTL5000's input is encoded and passed directly to the decoder.  
@@ -17,12 +16,12 @@ A few notes;
 4. A few tweaks to the audio library are required as shown below;
 
 Edit the following lines in C:\Users\..\.platformio\packages\framework-arduinoteensy\cores\teensy4\AudioStream.h  
-#define AUDIO_BLOCK_SAMPLES  960 // Was 128  
-#define AUDIO_SAMPLE_RATE_EXACT 48000.0f  // Was 44100  
+`#define AUDIO_BLOCK_SAMPLES  960 // Was 128`  
+`#define AUDIO_SAMPLE_RATE_EXACT 48000.0f  // Was 44100`  
 
 Add the following lines to C:\Users\..\.platformio\packages\framework-arduinoteensy\libraries\Audio\Audio.h  
-#include "input_opus_dec.h"  
-#include "output_opus_enc.h"  
+`#include "input_opus_dec.h"`  
+`#include "output_opus_enc.h"`  
 
 Add the following files to C:\Users\..\.platformio\packages\framework-arduinoteensy\libraries\Audio  
 input_opus_dec.h  
