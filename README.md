@@ -1,5 +1,11 @@
 # Opus4Teensy
-Real-time fixed-point implementation of Opus Encoder/Decoder for Teensy 4.0
+## A real-time fixed-point implementation of Opus Encoder/Decoder for Teensy 4.0
+### Supports encode and decode of full band audio at data rates of 8k to 64k
+
+Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.
+I've simply added config.h and wrapped it in C++ as per PJRC's recommendations.
+
+You can run the sample loopback main.cpp on Teensy 4.0 with Audio Shiels Rev D.
 
 Notes;
 1. Opus prefers 48Khz and frame sizes of 2.5, 5, 10 and 20 ms
