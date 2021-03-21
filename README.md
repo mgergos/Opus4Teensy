@@ -1,10 +1,9 @@
 # Opus4Teensy
 ## A real-time fixed-point implementation of Opus Encoder/Decoder for Teensy 4.0
 
-Encodes / decodes full band audio to as low as 16 kbs without significant damage.
-Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.
-I've simply wrapped it as per https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html 
-(actually wasn't that simple!)
+Encodes / decodes full band audio to as low as 16 kbs without significant damage.  
+Originating from nRF's SDK, the Opus-1.2.1 folder is essentially untouched.  
+I've simply wrapped it as per https://www.pjrc.com/teensy/td_libs_AudioNewObjects.html (NB. actually wasn't that simple!)  
 
 The sample loopback main.cpp runs on Teensy 4.0 with Audio Shield Rev D.
 The SGTL5000's input is encoded and passed directly to the decoder.
