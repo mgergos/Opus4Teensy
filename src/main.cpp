@@ -4,6 +4,9 @@
 #include <Audio.h>
 #include <Wire.h>
 
+#include <input_opus_dec.h>
+#include <output_opus_enc.h>
+
 AudioControlSGTL5000    sgtl5000_1;
 AudioInputI2S           i2s_in;
 AudioOutputI2S          i2s_out;
@@ -18,7 +21,7 @@ void setup()
   AudioMemory(10);
   sgtl5000_1.enable();  
   sgtl5000_1.inputSelect(AUDIO_INPUT_MIC);
-  sgtl5000_1.volume(0.6);
+  sgtl5000_1.volume(0.5);
   opusEncoder.initialise(); 
   //opusEncoder.setBitrate(16000); // Default is 64000
   opusDecoder.initialise();
@@ -29,11 +32,11 @@ void loop()
   uint8_t *opusBuffer;
   int32_t opusBufSize;
 
-  opusBufSize = opusEncoder.hasData();
+  opusBufSize = opusEncoder.hasData();            // Wait for a full block of Opus data
 
   if(opusBufSize > 0)
   {
-    opusBuffer = opusEncoder.getData();
-    opusDecoder.putData(opusBuffer, opusBufSize);   
+    opusBuffer = opusEncoder.getData();           // Write the encoded data to the buffer
+    opusDecoder.putData(opusBuffer, opusBufSize); // Write the buffer to the decoder (loopback)
   }
 }
