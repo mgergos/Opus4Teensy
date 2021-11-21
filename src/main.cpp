@@ -10,8 +10,8 @@
 AudioControlSGTL5000    sgtl5000_1;
 AudioInputI2S           i2s_in;
 AudioOutputI2S          i2s_out;
-AudioOutputOpusEnc      opusEncoder;
-AudioInputOpusDec       opusDecoder;
+AudioOutputOpusEnc      opusEncoder;  // Create Opus Encoder
+AudioInputOpusDec       opusDecoder;  // Create Opus Decoder
 AudioConnection         patchCord1(i2s_in, 0, opusEncoder, 0);
 AudioConnection         patchCord2(opusDecoder, 0, i2s_out, 0);
 AudioConnection         patchCord3(opusDecoder, 0, i2s_out, 1);
