@@ -1,8 +1,11 @@
 // Demo code for Opus Encode/Decode for Teensy 4.0
-
 #include <Arduino.h>
 #include <Audio.h>
 #include <Wire.h>
+
+#if AUDIO_BLOCK_SAMPLES != 960
+#error Please define AUDIO_BLOCK_SAMPLES 960 and AUDIO_SAMPLE_RATE_EXACT 48000.0f (in AudioStream.h)
+#endif
 
 #include <input_opus_dec.h>
 #include <output_opus_enc.h>
