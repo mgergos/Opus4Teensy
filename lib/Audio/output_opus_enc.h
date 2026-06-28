@@ -25,42 +25,44 @@
  *  	1. Teensy 4.0
  * 		2. Audio Adaptor Board Rev D
  *
- * Purpose:    Encode audio from Teensy Audio Library to Opus data 
+ * 	Purpose:    Encode audio from Teensy Audio Library to Opus data 
  *
  *******************************************************************************/
-#ifndef output_opus_enc_h_
-#define output_opus_enc_h_
+#ifndef OUTPUT_OPUS_ENC_H_
+#define OUTPUT_OPUS_ENC_H_
 /*******************************************************************************/
 
 #include "Arduino.h"
 #include "AudioStream.h"
 #include "opus.h"
-#include "config.h"
 
 class AudioOutputOpusEnc : public AudioStream
 {
 public:
-	AudioOutputOpusEnc(void) : AudioStream(1, inputQueueArray) {begin();}
+	AudioOutputOpusEnc(void) : AudioStream(2, inputQueueArray) {begin();}
 	void begin(void);
-	virtual void update(void);
 	void initialise(void);
 	void setComplexity(uint8_t complexity);
 	void setBitrate(uint32_t bitrate);
+	void forceMono(bool mono);
 	int32_t hasData();
 	uint8_t *getData();
+	virtual void update(void);
 
-	static uint8_t m_opus_encoder[7180];
-	static OpusEncoder * m_opus_encoder_state;
+	static uint8_t opus_encoder[11924];
+	static OpusEncoder * opus_encoder_state;
 
-	static int16_t encoder_frame_buf_uncompressed[CONFIG_AUDIO_FRAME_SIZE_SAMPLES];
-	static uint8_t encoder_frame_buf_compressed[CONFIG_AUDIO_FRAME_SIZE_BYTES];
-	static int32_t encoder_compressed_frame_size;
+	static int16_t encoder_frame_buf_PCM_LR[AUDIO_BLOCK_SAMPLES][2];
+	static int32_t encoder_frame_buf_PCM_LR_size;	
+	static uint8_t encoder_frame_buf_compressed[AUDIO_BLOCK_SAMPLES * CONFIG_OPUS_BITRATE_MAX / AUDIO_SAMPLE_RATE_EXACT / 8];
+	static int32_t encoder_frame_buf_compressed_size;
+
 	static bool encoderInitialised;
 
 protected:
 
 private:
-	audio_block_t *inputQueueArray[1];
+	audio_block_t *inputQueueArray[2];
 };
 
-#endif
+#endif // OUTPUT_OPUS_ENC_H_

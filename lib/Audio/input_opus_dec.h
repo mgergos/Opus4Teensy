@@ -25,40 +25,41 @@
  *  	1. Teensy 4.0
  * 		2. Audio Adaptor Board Rev D
  *
- * Purpose:    Decode Opus encoded data for use by Teensy Audio Library
+ * 	Purpose:    Decode Opus encoded data for use by Teensy Audio Library
  *
  *******************************************************************************/
-#ifndef input_opus_dec_h_
-#define input_opus_dec_h_
+#ifndef INPUT_OPUS_DEC_H_
+#define INPUT_OPUS_DEC_H_
 /*******************************************************************************/
 
 #include "Arduino.h"
 #include "AudioStream.h"
 #include "opus.h"
-#include "config.h"
 
 class AudioInputOpusDec : public AudioStream
 {
 public:
-	AudioInputOpusDec(void) : AudioStream(1, inputQueueArray) {begin();}
+	AudioInputOpusDec(void) : AudioStream(0, NULL) {begin();}
 	void begin(void);
-	virtual void update(void);
 	void initialise(void);
 	int32_t putData(uint8_t* compressedBuffer, int32_t bufferSize);
+	virtual void update(void);
 
-	static uint8_t m_opus_decoder[9224];
-	static OpusDecoder * m_opus_decoder_state;
+	static uint8_t opus_decoder[17944];
+	static OpusDecoder * opus_decoder_state;
 
-	static uint8_t decoder_frame_buf_compressed[CONFIG_AUDIO_FRAME_SIZE_BYTES];
-	static int32_t decoder_decompressed_frame_size;
-	static int32_t decoder_compressed_frame_size;
+	static int16_t decoder_frame_buf_PCM_LR[AUDIO_BLOCK_SAMPLES][2];
+	static int32_t decoder_frame_buf_PCM_LR_size;
+	static uint8_t decoder_frame_buf_compressed[AUDIO_BLOCK_SAMPLES * CONFIG_OPUS_BITRATE_MAX / AUDIO_SAMPLE_RATE_EXACT / 8];
+	static int32_t decoder_frame_buf_compressed_size;
+	
 	static bool decoderInitialised;
 	static elapsedMicros inputPacketPhase;
 
 protected:
 
 private:
-	audio_block_t *inputQueueArray[1];
+
 };
 
-#endif
+#endif // INPUT_OPUS_DEC_H_
